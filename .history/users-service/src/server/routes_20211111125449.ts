@@ -4,7 +4,7 @@ import comparePassword from "#root/helpers/passwordCompare";
 import config from 'config';
 import dayjs from "dayjs";
 import { getRepository, getConnection } from "typeorm";
-import UserSessions from "#root/db/entities/UserSessions";
+import UserSession from "#root/db/entities/UserSession";
 import generateUUID from "#root/helpers/generateUUID";
 
 
@@ -25,22 +25,18 @@ const setupRoutes = (app:Express) => {
 
       if (!user) return next(new Error("Invalid username!"));
       if (!comparePassword(req.body.password, user.passwordHash)) return next(new Error("Invalid password!"));
-      
       const expiresAt = dayjs().add(USER_SESSION_EXPIRY_HOURS, "hour").toISOString();
-      
       const sessionToken = generateUUID();
-      
       const userSession = {
         expiresAt,
         id: sessionToken,
         userId: user.id
       }
-      await connection.createQueryBuilder().insert().into(UserSessions).values([userSession]).execute();
+      await connection.createQueryBuilder().insert().into(UserSession).values([userSession]).execute();
 
       return res.json(userSession);
-
     } catch (error) {
-      return next(error);
+      
     }
   })
   

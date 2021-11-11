@@ -25,11 +25,8 @@ const setupRoutes = (app:Express) => {
 
       if (!user) return next(new Error("Invalid username!"));
       if (!comparePassword(req.body.password, user.passwordHash)) return next(new Error("Invalid password!"));
-      
       const expiresAt = dayjs().add(USER_SESSION_EXPIRY_HOURS, "hour").toISOString();
-      
       const sessionToken = generateUUID();
-      
       const userSession = {
         expiresAt,
         id: sessionToken,
@@ -38,9 +35,8 @@ const setupRoutes = (app:Express) => {
       await connection.createQueryBuilder().insert().into(UserSessions).values([userSession]).execute();
 
       return res.json(userSession);
-
     } catch (error) {
-      return next(error);
+      
     }
   })
   
