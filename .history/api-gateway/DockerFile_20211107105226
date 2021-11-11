@@ -1,9 +1,0 @@
-FROM node:14.2.1
-
-COPY . /opt/app
-
-WORKDIR /opt/app
-
-RUN npm
-
-CMD npm watch --
