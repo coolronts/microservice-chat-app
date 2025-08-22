@@ -26,10 +26,10 @@
         "config": "^3.3.6",
         "cors": "^2.8.5",
         "dayjs": "^1.10.7",
-        "express": "^4.17.1",
-        "mysql2": "^2.3.3-rc.0",
+        "express": "^4.20.0",
+        "mysql2": "^3.14.3",
         "reflect-metadata": "^0.1.13",
-        "typeorm": "^0.2.38",
+        "typeorm": "^0.3.0",
         "uuid": "^8.3.2",
         "uuidv4": "^6.2.12"
     },
